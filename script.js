@@ -6,44 +6,67 @@ function computerPlay() {
     return roshambo[random];
 }
 
-const playerSelection = prompt("Let's playa game! Pick rock, paper or scissors.").toLowerCase();
-console.log(playerSelection)
+let playerScore = 0;
+let compScore = 0;
 
-const computerSelection = computerPlay();
-console.log(computerSelection);
+function playRound() {
+    const playerSelection = prompt("Let's playa game! Pick rock, paper or scissors.").toLowerCase();
+    
+    const computerSelection = computerPlay();
+    console.log(playerSelection, computerSelection);
 
-function playRound(playerSelection, computerSelection) {
     if (playerSelection === computerSelection) {
         return "It's a tie.";
     }
     if (playerSelection === "rock") {
         if (computerSelection === "scissors") {
-            return "You Win";
+            return playerScore++ ;
+           
         } else {
-            return "You Lose";
+            return compScore++;
+         
         }
     }
     else if (playerSelection === "paper") {
         if (computerSelection === "rock") {
-            return "You Win";
+            return playerScore++;
+          
         } else {
-            return "You Lose";
+            return compScore++;
+            
         }
     }
     else if(playerSelection === "scissors") {
         if (computerSelection === "paper") {
-            return "You Win";
+            return playerScore++;
+           
         } else {
-            return "You Lose";
+            return compScore++;
+            
         }
     }
 }
 
-console.log(playRound(playerSelection, computerSelection));
 
 function game() {
+
     for (let i = 0; i < 5; i++) {
-
-    }
-
+       playRound() ;
+       }
+    console.log(playerScore, compScore);
 }
+
+function newGame() {
+    playerScore = 0;
+    compScore = 0;
+    game();
+    if (playerScore  > compScore) {
+        console.log("You Win")
+    } else {
+        console.log("Your Lose")
+    }
+}
+
+
+
+newGame();
