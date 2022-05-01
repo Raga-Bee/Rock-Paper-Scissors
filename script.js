@@ -6,45 +6,67 @@ function computerPlay() {
     return roshambo[random];
 }
 
-let playerScore = 0;
-let compScore = 0;
+let score = {
+    Player:0,
+    Computer:0,
+}
 
-function playRound() {
-    const playerSelection = prompt("Let's playa game! Pick rock, paper or scissors.").toLowerCase();
+const btnRock = document.querySelector('#rock');
+const btnPaper = document.querySelector('#paper');
+const btnScissors = document.querySelector('#scissors');
+const playerScore = document.querySelector('#player-score');
+const compScore = document.querySelector('#computer-score');
+const textResult = document.querySelector('#text-result');
+    
+
+function playRound(playerSelection) {
     
     const computerSelection = computerPlay();
+    
     console.log(playerSelection, computerSelection);
 
     if (playerSelection === computerSelection) {
-        return "It's a tie.";
+        textResult.textContent="It's a draw.";
     }
     if (playerSelection === "rock") {
         if (computerSelection === "scissors") {
-            return playerScore++ ;
+            score.Player+=1 ;
+            textResult.textContent="You win!";
+            playerScore.innerText = score.Player+"";
            
         } else {
-            return compScore++;
+            score.Computer+=1;
+            textResult.textContent="You Lose!";
+            compScore.innerText = score.Computer+"";
          
         }
     }
     else if (playerSelection === "paper") {
         if (computerSelection === "rock") {
-            return playerScore++;
+            score.Player+=1;
+            textResult.textContent="You Win!"
+            playerScore.innerText = score.Player+"";
           
         } else {
-            return compScore++;
+            score.Computer+=1;
+            textResult.textContent="You Lose!";
+            compScore.innerText = score.Computer+"";
             
         }
     }
     else if(playerSelection === "scissors") {
         if (computerSelection === "paper") {
-            return playerScore++;
+            score.Player+=1;
+            textResult.textContent="You Win1";
+            playerScore.innerText= score.Player+"";
            
         } else {
-            return compScore++;
-            
+            score.Computer+=1;
+            textResult.textContent="You Lose!";
+            compScore.innerText= score.Computer+"";
         }
     }
+    
 }
 
 
@@ -67,6 +89,6 @@ function newGame() {
     }
 }
 
-
-
-newGame();
+btnRock.addEventListener('click', function(){playRound('rock')});
+btnPaper.addEventListener('click', function(){playRound('paper')});
+btnScissors.addEventListener('click', function(){playRound('scissors')});
